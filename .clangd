@@ -1,0 +1,5 @@
+CompileFlags:
+  Add: [-xc++]
+  CompilationDatabase: build/posix-clang
+Diagnostics:
+  UnusedIncludes: Strict

@@ -1,0 +1,8 @@
+- Finish implementing core and uci
+- Test coverage
+- CMake
+- Review repo
+- GH actions (CI)
+- Codecov
+- Branch protection
+- Conan

@@ -1,0 +1,7 @@
+Checks: 'bugprone-*,-bugprone-exception-escape,clang-analyzer-*,clang-diagnostic-*,concurrency-*,cppcoreguidelines-*,misc-*,modernize-*,-modernize-use-trailing-return-type,performance-*,readability-*,-readability-named-parameter'
+HeaderFilterRegex: '.*\.h$'
+UseColor: true
+WarningsAsErrors: '*'
+CheckOptions:
+  - key: cppcoreguidelines-special-member-functions.AllowSoleDefaultDtor
+    value: 'true'

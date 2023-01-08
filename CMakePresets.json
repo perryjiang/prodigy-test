@@ -1,0 +1,238 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "posix-base",
+      "hidden": true,
+      "generator": "Ninja Multi-Config",
+      "binaryDir": "build/${presetName}",
+      "installDir": "build/${presetName}",
+      "condition": {
+        "type": "inList",
+        "string": "${hostSystemName}",
+        "list": [
+          "Darwin",
+          "Linux"
+        ]
+      },
+      "cacheVariables": {
+        "CMAKE_COLOR_DIAGNOSTICS": true,
+        "CMAKE_COMPILE_WARNING_AS_ERROR": true,
+        "CMAKE_CXX_EXTENSIONS": false,
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true
+      },
+      "warnings": {
+        "dev": true,
+        "uninitialized": true
+      },
+      "errors": {
+        "dev": true
+      }
+    },
+    {
+      "name": "posix-gcc",
+      "inherits": "posix-base",
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "g++-12",
+        "CMAKE_CXX_FLAGS": "-Wall -Wextra -Wpedantic -Wcast-align -Wcast-qual -Wctor-dtor-privacy -Wdouble-promotion -Wduplicated-branches -Wduplicated-cond -Wextra-semi -Wfloat-equal -Wformat=2 -Wimplicit-fallthrough=5 -Wlogical-op -Wnon-virtual-dtor -Wnull-dereference -Wold-style-cast -Woverloaded-virtual -Wredundant-decls -Wsign-conversion -Wstrict-null-sentinel -Wsuggest-final-methods -Wsuggest-final-types -Wsuggest-override -Wundef -Wuseless-cast"
+      }
+    },
+    {
+      "name": "posix-clang",
+      "inherits": "posix-base",
+      "cacheVariables": {
+        "CMAKE_CXX_CLANG_TIDY": "clang-tidy",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_CXX_CPPCHECK": "cppcheck",
+        "CMAKE_CXX_FLAGS": "-Wall -Wextra -Wpedantic -Wimplicit-fallthrough",
+        "CMAKE_CXX_INCLUDE_WHAT_YOU_USE": "include-what-you-use",
+        "CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE": true
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "posix-gcc-debug",
+      "configurePreset": "posix-gcc",
+      "configuration": "Debug"
+    },
+    {
+      "name": "posix-gcc-relwithdebinfo",
+      "configurePreset": "posix-gcc",
+      "configuration": "RelWithDebInfo"
+    },
+    {
+      "name": "posix-gcc-release",
+      "configurePreset": "posix-gcc",
+      "configuration": "Release"
+    },
+    {
+      "name": "posix-clang-debug",
+      "configurePreset": "posix-clang",
+      "configuration": "Debug"
+    },
+    {
+      "name": "posix-clang-relwithdebinfo",
+      "configurePreset": "posix-clang",
+      "configuration": "RelWithDebInfo"
+    },
+    {
+      "name": "posix-clang-release",
+      "configurePreset": "posix-clang",
+      "configuration": "Release"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "stopOnFailure": true,
+        "noTestsAction": "error"
+      }
+    },
+    {
+      "name": "posix-gcc-debug",
+      "inherits": "base",
+      "configurePreset": "posix-gcc",
+      "configuration": "Debug"
+    },
+    {
+      "name": "posix-gcc-relwithdebinfo",
+      "inherits": "base",
+      "configurePreset": "posix-gcc",
+      "configuration": "RelWithDebInfo"
+    },
+    {
+      "name": "posix-gcc-release",
+      "inherits": "base",
+      "configurePreset": "posix-gcc",
+      "configuration": "Release"
+    },
+    {
+      "name": "posix-clang-debug",
+      "inherits": "base",
+      "configurePreset": "posix-clang",
+      "configuration": "Debug"
+    },
+    {
+      "name": "posix-clang-relwithdebinfo",
+      "inherits": "base",
+      "configurePreset": "posix-clang",
+      "configuration": "RelWithDebInfo"
+    },
+    {
+      "name": "posix-clang-release",
+      "inherits": "base",
+      "configurePreset": "posix-clang",
+      "configuration": "Release"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "posix-gcc-debug",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "posix-gcc"
+        },
+        {
+          "type": "build",
+          "name": "posix-gcc-debug"
+        },
+        {
+          "type": "test",
+          "name": "posix-gcc-debug"
+        }
+      ]
+    },
+    {
+      "name": "posix-gcc-relwithdebinfo",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "posix-gcc"
+        },
+        {
+          "type": "build",
+          "name": "posix-gcc-relwithdebinfo"
+        },
+        {
+          "type": "test",
+          "name": "posix-gcc-relwithdebinfo"
+        }
+      ]
+    },
+    {
+      "name": "posix-gcc-release",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "posix-gcc"
+        },
+        {
+          "type": "build",
+          "name": "posix-gcc-release"
+        },
+        {
+          "type": "test",
+          "name": "posix-gcc-release"
+        }
+      ]
+    },
+    {
+      "name": "posix-clang-debug",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "posix-clang"
+        },
+        {
+          "type": "build",
+          "name": "posix-clang-debug"
+        },
+        {
+          "type": "test",
+          "name": "posix-clang-debug"
+        }
+      ]
+    },
+    {
+      "name": "posix-clang-relwithdebinfo",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "posix-clang"
+        },
+        {
+          "type": "build",
+          "name": "posix-clang-relwithdebinfo"
+        },
+        {
+          "type": "test",
+          "name": "posix-clang-relwithdebinfo"
+        }
+      ]
+    },
+    {
+      "name": "posix-clang-release",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "posix-clang"
+        },
+        {
+          "type": "build",
+          "name": "posix-clang-release"
+        },
+        {
+          "type": "test",
+          "name": "posix-clang-release"
+        }
+      ]
+    }
+  ]
+}

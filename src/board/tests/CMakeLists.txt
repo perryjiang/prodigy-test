@@ -1,0 +1,5 @@
+add_boost_test(color)
+add_boost_test(coordinate)
+add_boost_test(file)
+add_boost_test(piece_type)
+add_boost_test(rank)
